@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRoleEnum;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -17,12 +20,22 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $companyIds = Company::pluck('id')->toArray();
         return [
-            'name' => $this->faker->name(),
+            'name' => fake()->lastName() . ' ' . fake()->firstName(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => Hash::make('123456789'), // password
             'remember_token' => Str::random(10),
+            'avatar' => fake()->imageUrl(60, 60),
+            'phone' => fake()->phoneNumber(),
+            'link' => null,
+            'role' => fake()->randomElement(UserRoleEnum::getValues()),
+            'bio' => fake()->boolean() ? fake()->name() : null,
+            'position' => fake()->jobTitle(),
+            'gender' => fake()->boolean(),
+            'city' => fake()->city(),
+            'company_id' => fake()->randomElement($companyIds),
         ];
     }
 

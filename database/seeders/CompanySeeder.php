@@ -3,21 +3,19 @@
 namespace Database\Seeders;
 
 use App\Models\Company;
-use App\Models\Language;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class CompanySeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call(CompanySeeder::class);
-        $this->call(LanguageSeeder::class);
-        $this->call(UserSeeder::class);
+        //
+        Company::factory()->count(20)->create();
     }
 }
