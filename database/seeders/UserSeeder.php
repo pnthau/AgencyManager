@@ -23,8 +23,9 @@ class UserSeeder extends Seeder
         // User::factory()->count(100)->create();
         $faker = \Faker\Factory::create();
         $companyIds = Company::pluck('id')->toArray();
+        $amount = 100;
         // $data = [];
-        for ($i = 0; $i < 10000; $i++) {
+        for ($i = 0; $i < $amount; $i++) {
             # code...
             User::create(
                 [

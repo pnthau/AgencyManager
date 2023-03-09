@@ -31,7 +31,7 @@ final class UserRoleEnum extends Enum
     public static function getUserRoleNameByValue($value)
     {
         return array_search($value, self::getUserRoleName());
-    }
+    }   
 
     public static function getUserRoleByKey($key)
     {
