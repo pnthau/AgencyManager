@@ -1,1 +1,4 @@
 
+.after-none::after{
+    content:none;
+}

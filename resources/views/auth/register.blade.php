@@ -81,34 +81,62 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form role="form" method="POST" action="{{ route('register') }}">
+                            <form role="form" method="POST" action="{{ route('registering') }}">
                                 @csrf
-                                <div class="row mb-3">
-                                    <input id="name" type="text"
-                                        class="form-control @error('name') is-invalid @enderror" name="name"
-                                        placeholder="Enter your name" value="{{ old('name') }}" required
-                                        autocomplete="name" autofocus>
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="row mb-3">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email"
-                                        placeholder="Enter Your Email">
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                                @auth
+                                    <div class="row mb-3">
+                                        <input id="name" type="text"
+                                            class="form-control @error('name') is-invalid @enderror" name="name"
+                                            placeholder="Enter your name" value="{{ auth()->user()->name }}" required
+                                            autocomplete="name" autofocus>
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="row mb-3">
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ auth()->user()->email }}" required autocomplete="email"
+                                            placeholder="Enter Your Email">
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                @endauth
+
+                                @guest
+                                    <div class="row mb-3">
+                                        <input id="name" type="text"
+                                            class="form-control @error('name') is-invalid @enderror" name="name"
+                                            placeholder="Enter your name" value="{{ old('name') }}" required
+                                            autocomplete="name" autofocus>
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="row mb-3">
+                                        <input id="email" type="email"
+                                            class="form-control @error('email') is-invalid @enderror" name="email"
+                                            value="{{ old('email') }}" required autocomplete="email"
+                                            placeholder="Enter Your Email">
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                @endguest
                                 <div class="row mb-3">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password" placeholder="Enter your password">
+                                        required autocomplete="new-password" placeholder="Enter your password"
+                                        value="{{ old('name') }}">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -121,18 +149,32 @@
                                         placeholder="Enter your password again">
                                 </div>
                                 <div class="mb-3">
-                                    <select id="city" class="select-cities form-control" name="city">
+                                    <select id="city" class="select-cities form-control" name="city"
+                                        value="{{ old('name') }}">
                                         <option value="AL">Alabama</option>
                                         <option value="WY">Wyoming</option>
                                     </select>
                                 </div>
-
-                                <select id="company-id" class="select-companies form-control" name="company_id">
+                                <select id="company-id" class="select-companies form-control mb-3" name="company_id"
+                                    value="{{ old('name') }}">
                                     <option></option>
                                     @foreach ($companies as $company)
                                         <option value="{{ $company->id }}">{{ $company->name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="d-flex  mb-3 justify-content-evenly">
+                                    <div class="form-check">
+                                        <input class="form-check-input after-none" type="radio" name="role"
+                                            id="hr">
+                                        <label class="custom-control-label" for="hr">{{ __('HR') }}</label>
+                                    </div>
+                                    <div class="form-check mr-3">
+                                        <input class="form-check-input after-none" type="radio" name="role"
+                                            id="aplicant" checked>
+                                        <label class="custom-control-label" for="aplicant">{{ __('Aplicant') }}</label>
+                                    </div>
+                                </div>
+
                         </div>
                         <div class="row card-body">
                             <div class="col-md-6 offset-md-4">

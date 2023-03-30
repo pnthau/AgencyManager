@@ -16,11 +16,11 @@
                                     @csrf
                                     <div class="mb-3">
                                         <input name="email" type="email" class="form-control form-control-lg"
-                                            placeholder="Email" aria-label="Email">
+                                            placeholder="Email" aria-label="Email" value="roman95@example.org">
                                     </div>
                                     <div class="mb-3">
                                         <input name="password" type="password" class="form-control form-control-lg"
-                                            placeholder="Password" aria-label="Password">
+                                            placeholder="Password" aria-label="Password" value="123456789">
                                     </div>
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" type="checkbox" id="rememberMe">

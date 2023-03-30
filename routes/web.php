@@ -21,5 +21,6 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/register', [MyRegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [MyRegisterController::class, 'registering'])->name('registering');
 Route::get('/register/google', [MyRegisterController::class, 'registerGoogle'])->name('register.google');
 Route::get('google/callback', [MyRegisterController::class, 'handleGoogleCallback'])->name('google.callback');

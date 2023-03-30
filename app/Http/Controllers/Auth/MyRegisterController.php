@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Providers\RouteServiceProvider;
-use App\Traits\RegistersUsers;
+use App\Traits\Users\RegistersUsers;
 use Illuminate\Support\Facades\View;
 
 class MyRegisterController extends Controller

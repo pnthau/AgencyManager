@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         //
-        if (!Schema::hasColumn('posts', 'is_pinned')) {
-            Schema::table('posts', function (Blueprint $table) {
-                $table->boolean('is_pinned')->default(false)->after('status');
+        if (!Schema::hasColumns('files', ['deleted_at'])) {
+            Schema::table('files', function (Blueprint $table) {
+                $table->softDeletes();
             });
         }
     }
@@ -29,9 +29,9 @@ return new class extends Migration
     public function down()
     {
         //
-        if (Schema::hasColumn('posts', 'is_pinned')) {
-            Schema::table('posts', function (Blueprint $table) {
-                $table->dropColumn(['is_pinned']);
+        if (Schema::hasColumns('files', ['deleted_at'])) {
+            Schema::table('files', function (Blueprint $table) {
+                $table->dropSoftDeletes();
             });
         }
     }

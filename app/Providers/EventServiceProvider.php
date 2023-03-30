@@ -17,10 +17,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-            SocialiteProviders\Manager\SocialiteWasCalled::class => [
-                'SocialiteProviders\\Zoho\\ZohoExtendSocialite@handle',
-                \SocialiteProviders\Google\GoogleExtendSocialite::class . '@handle',
-            ],
+        ],
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            \SocialiteProviders\Google\GoogleExtendSocialite::class . '@handle',
         ],
     ];
 
