@@ -42,4 +42,9 @@ class Company extends Model
 
     public $timestamps = false;
 
+    public $fillable = [
+        "name",
+        "city",
+        "country",
+    ];
 }

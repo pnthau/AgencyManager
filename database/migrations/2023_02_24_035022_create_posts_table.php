@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('company_id')->constrained();
+            $table->foreignId('company_id')->constrained(); 
             $table->string('job_title');
             $table->string('district');
             $table->string('city');
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->integer('num_applications')->nullable();
             $table->integer('status')->default(0);
-            $table->string('slug')->default();
+            $table->string('slug')->default("slug");
             $table->timestamps();
         });
     }

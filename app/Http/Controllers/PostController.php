@@ -2,85 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PostsImport;
 use App\Models\Post;
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PostController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = $this->model()->query();
+        $query->orderBy('id', 'desc')
+
+            ->with('company:id,name')
+            ->with('user:id,name');
+
+        return response()->json($query->paginate(10));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function importCSV(Request $request)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePostRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorePostRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePostRequest  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePostRequest $request, Post $post)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
-    {
-        //
+        $file = $request->file('csv_file');
+        Excel::import(new PostsImport, $file);
+        $query = $this->model()->query()
+            ->orderBy('id', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->with('company:id,name')
+            ->with('user:id,name')
+            ->paginate(10);
+        return response()->json($query);
     }
 }

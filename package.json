@@ -16,5 +16,9 @@
         "sass": "^1.56.1",
         "typescript": "^5.0.2",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "to-arraybuffer": "^1.0.1",
+        "xlsx": "^0.18.5"
     }
 }

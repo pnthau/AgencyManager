@@ -2,3 +2,8 @@
 .after-none::after{
     content:none;
 }
+.costumize-input-file {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}

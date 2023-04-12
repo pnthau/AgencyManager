@@ -48,7 +48,10 @@
 
     <link href="{{ asset('font/nucleo-icons.woff2') }}" rel='stylesheet' type='text/css'>
     <link id="pagestyle" href="{{ asset('css/argon-dashboard.min.css?v=2.0.5') }}" rel="stylesheet" />
-
+    {{-- custom css --}}
+    <link href="{{ asset('css/app.css') }}" rel='stylesheet' type='text/css'>
+    @section('styles')
+    @show
     <style>
         .async-hide {
             opacity: 0 !important
