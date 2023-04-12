@@ -110,4 +110,9 @@ class User extends Authenticatable
             get: fn () => UserRoleEnum::getUserRoleByKey($this->role),
         );
     }
+
+    public static function getUserModel()
+    {
+        return static::class;
+    }
 }

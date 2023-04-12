@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +19,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return "This my route admin";
 });
-
-Route::get('/users', [UserController::class, 'showDatatableUsers'])->name('users.index');
-Route::get('/users/show', [UserController::class, 'showUserDetail'])->name('users.show');
-Route::post('/users/api/search', [UserController::class, 'searchUsers'])->name('users.search');
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/', [UserController::class, 'showDatatable'])->name('index');
+    Route::get('/show', [UserController::class, 'showDetail'])->name('show');
+    Route::post('/delete', [UserController::class, 'destroy'])->name('destroy');
+});
+Route::prefix('posts')->name('posts.')->group(function () {
+    Route::get('/', [PostController::class, 'showDatatable'])->name('index');
+    // Route::get('/show', [UserController::class, 'showDetail'])->name('show');
+    // Route::post('/delete', [UserController::class, 'destroy'])->name('destroy');
+});

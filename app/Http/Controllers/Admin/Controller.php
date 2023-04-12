@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -28,5 +28,16 @@ class Controller extends BaseController
     {
         $model = "App\\Models\\{$this->getClassModel()}";
         return app()->instance('model', new $model());
+    }
+
+    protected function table()
+    {
+        $suffix = "s";
+        return strtolower($this->getClassModel()) . $suffix;
+    }
+
+    protected function getCurrentRoute()
+    {
+        return Route::currentRouteName();
     }
 }

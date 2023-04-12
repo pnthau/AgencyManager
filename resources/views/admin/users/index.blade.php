@@ -18,6 +18,7 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive p-0">
+                                    <label for="role">Role:</label>
                                     <div class="bg-white border-radius-lg d-flex mb-2">
                                         <select id="role" class="form-select form-select-lg" name="role"
                                             aria-label=".form-select-lg example">
@@ -48,6 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive p-0">
+                                    <label for="company">Company:</label>
                                     <div class="bg-white border-radius-lg d-flex mb-2">
                                         <select id="company" class="form-select form-select-lg" name="company"
                                             aria-label=".form-select-lg example">
@@ -93,9 +95,7 @@
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -135,22 +135,21 @@
                                             <p class="text-xs font-weight-bold mb-0">
                                                 {{ $user->city }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                                        </td>
+
                                         <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
-                                            </a>
+                                            <form action="{{ route('users.destroy') }}" method="post">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger btn-sm button-delete"
+                                                    value="{{ $user->id }}" name="id">DELETE</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
-                                <div class="paginator paginator-search">
-                                    {{ $viewData[$table]->links() }}
-                                </div>
                             </tbody>
                         </table>
+                        <div class="paginator paginator-search">
+                            {{ $viewData[$table]->links() }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -160,19 +159,7 @@
 @section('scripts')
     <script>
         window.onload = (event) => {
-            const paginator = document.querySelector('.paginator')
-            const table = document.querySelector('table')
-            const search = document.querySelector('#search')
-            const role = document.querySelector('#role')
-            const submit = document.querySelector('#submit')
-            const _token = document.querySelector('meta[name="csrf-token"]').content
-            let pages = null;
 
-            // submit.addEventListener("click", async function(event) {
-            //     const url = `{{ route('users.index') }}?keyword=${search.value || ""}&role=${role.value}`;
-            //     const response = await fetch(url);
-            //     const users = await response.json()
-            // })
         }
     </script>
 @endsection
